@@ -1,0 +1,3 @@
+public interface EntregaDAO extends CrudRepository<Entrega, Long> {
+
+}

@@ -1,0 +1,8 @@
+package logisticaentregas.projetocep;
+
+import org.springframework.data.repository.CrudRepository;
+import com.vitoria.logistica.model.Cliente;
+
+public interface ClienteDAO extends CrudRepository<Cliente, Long> {
+
+}
