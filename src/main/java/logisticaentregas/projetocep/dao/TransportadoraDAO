@@ -1,3 +1,0 @@
-public interface TransportadoraDAO extends CrudRepository<Transportadora, Long> {
-
-}

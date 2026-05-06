@@ -1,3 +1,0 @@
-public interface EnderecoDAO extends CrudRepository<Endereco, Long> {
-
-}
