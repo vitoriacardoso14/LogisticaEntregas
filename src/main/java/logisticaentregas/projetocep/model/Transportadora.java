@@ -1,26 +1,30 @@
-package logisticaentregas.projetocep.model;
+package logisticaentregas.projetocep.model; 
 
-import jakarta.persistence;
-import java.util.List;
+import jakarta.persistence.*; 
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore; // evita loop JSON
+import java.util.List;
 
-import javax.annotation.processing.Generated;
-
-@Entity
-@Table(name = "Transportadora")
-@Data
-@NoArgsConstructor
-@AllConstructor
-
+@Entity 
+@Table(name = "tb_transportadora") 
+@Getter 
+@Setter
+@NoArgsConstructor 
+@AllArgsConstructor
 public class Transportadora {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    @Id // chave primária
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+
+    @Column(nullable = false) // obrigatório
+    private String nome; //
+
+    @Column(nullable = false, unique = true) // obrigatório e único
     private String cnpj;
 
-    @OneToMany // uma transportadora pode ter varias entregas
+    // uma transportadora pode ter várias entregas
+    @OneToMany(mappedBy = "transportadora", fetch = FetchType.LAZY) 
+    @JsonIgnore 
     private List<Entrega> entregas;
 }

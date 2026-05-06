@@ -1,28 +1,29 @@
-package logisticaentregas.projetocep.model;
+package logisticaentregas.projetocep.model; // pacote
 
-import jakarta.persistence;
-import lombok.*;
+import jakarta.persistence.*; 
+import lombok.*; // Lombok
 
-import javax.annotation.processing.Generated;
+@Entity 
+@Table(name = "tb_endereco") 
+@Getter 
+@Setter 
+@NoArgsConstructor 
+@AllArgsConstructor
+public class Endereco { 
 
-@Entity
-@Table(name = "Endereços")
-@Data
-@NoArgsConstructor
-@AllConstructor
-
-public class Endereco {
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id; 
 
-    private Long id;
-    private String cep;
-    private String rua;
-    private String cidade;
-    private String estado;
+    @Column(nullable = false) // obrigatório
+    private String cep; 
 
-    @ManyToOne // muitos enderecos pertecem a um cliente
-    @JoinColumn(name = cliente_id) // cria a coluna cliente_id como chave estrangeira 
+    private String rua; 
+    private String cidade; 
+    private String estado; 
+
+    // muitos endereços pertencem a um cliente
+    @ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "cliente_id", nullable = false) // chave estrangeira no banco
     private Cliente cliente; // cliente dono do endereço
 }
